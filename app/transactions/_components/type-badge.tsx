@@ -5,7 +5,7 @@ import { CircleIcon } from "lucide-react";
 interface TransactionTypeBadgeProps {
   transaction: Transaction;
 }
-const TransactionTypePage = ({ transaction }: TransactionTypeBadgeProps) => {
+const TransactionTypeBadge = ({ transaction }: TransactionTypeBadgeProps) => {
   if (transaction.type === TransactionType.DEPOSIT) {
     return (
       <Badge className="bg-muted text-primary hover:bg-muted">
@@ -31,4 +31,4 @@ const TransactionTypePage = ({ transaction }: TransactionTypeBadgeProps) => {
   );
 };
 
-export default TransactionTypePage;
+export default TransactionTypeBadge;
