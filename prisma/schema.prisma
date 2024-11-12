@@ -22,7 +22,7 @@ model Transaction {
   paymentMethod TransactionPaymentMethod
   date          DateTime
   createdAt     DateTime                 @default(now())
-  updatedAt     DateTime
+  updatedAt     DateTime?
   userId        String
 }
 
