@@ -9,6 +9,7 @@ import { getDashBoard } from "../_data/get-dashboard";
 import ExpensesPerCategory from "./_components/expenses-per-category";
 import LastTransations from "./_components/last-transactions";
 import { ScrollArea } from "../_components/ui/scroll-area";
+import canUserAddTransaction from "../_data/can-user-add-transaction";
 
 interface HomeProps {
   searchParams: { month: string };
@@ -26,7 +27,7 @@ export default async function Home({ searchParams: { month } }: HomeProps) {
   }
 
   const dashboard = await getDashBoard(month);
-
+  const userCanAddTransaction = await canUserAddTransaction();
   return (
     <>
       <Navbar />
@@ -38,7 +39,10 @@ export default async function Home({ searchParams: { month } }: HomeProps) {
         </div>
         <div className="grid grid-cols-[2fr,1fr] gap-6 overflow-hidden">
           <ScrollArea className="flex flex-col overflow-hidden">
-            <SummaryCards {...dashboard} />
+            <SummaryCards
+              {...dashboard}
+              userCanAddTransaction={userCanAddTransaction}
+            />
             <div className="mt-6 grid grid-cols-3 grid-rows-1 gap-6">
               <TransactionsPieChart
                 typesPercentage={dashboard.typesPercentage}

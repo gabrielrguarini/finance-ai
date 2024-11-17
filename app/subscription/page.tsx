@@ -5,11 +5,13 @@ import { Card, CardContent, CardHeader } from "../_components/ui/card";
 import { CheckIcon, XIcon } from "lucide-react";
 import AcquirePlanButton from "./_components/acquire-plan-button";
 import { Badge } from "../_components/ui/badge";
+import GetCurrentMonthTransactions from "../_data/get-current-month-transactions";
 
 const SubscriptionPage = async () => {
   const { userId } = await auth();
   if (!userId) redirect("/login");
   const user = await (await clerkClient()).users.getUser(userId);
+  const currentMonthTransactions = await GetCurrentMonthTransactions();
   const hasPremiumPlan = user.publicMetadata.subscriptionPlan === "premium";
   return (
     <>
@@ -17,7 +19,7 @@ const SubscriptionPage = async () => {
       <div className="space-y-6 p-6">
         <h1 className="text-2xl font-bold">Assinatura</h1>
         <div className="flex gap-6">
-          <Card className="flex flex-col gap-6">
+          <Card className="flex w-[450px] flex-col gap-6">
             <CardHeader className="relative border-b border-solid py-8">
               {hasPremiumPlan && (
                 <Badge className="absolute left-4 top-4 bg-primary/10 text-primary">
@@ -36,7 +38,9 @@ const SubscriptionPage = async () => {
             <CardContent className="space-y-6 py-8">
               <div className="flex items-center gap-2">
                 <CheckIcon className="text-primary" />
-                <p>Apenas 10 transações por mês (7/10)</p>
+                <p>
+                  Apenas 10 transações por mês ({currentMonthTransactions}/10)
+                </p>
               </div>
               <div className="flex items-center gap-2">
                 <XIcon className="" />
@@ -45,7 +49,7 @@ const SubscriptionPage = async () => {
             </CardContent>
           </Card>
 
-          <Card className="flex flex-col gap-6">
+          <Card className="flex w-[450px] flex-col gap-6">
             <CardHeader className="border-b border-solid py-8">
               <h2 className="text-center text-2xl font-semibold">
                 Plano Premium
