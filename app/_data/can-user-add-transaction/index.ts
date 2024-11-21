@@ -9,8 +9,8 @@ const canUserAddTransaction = async () => {
   const user = await (await clerkClient()).users.getUser(userId);
   const currentMonthTransactions = await GetCurrentMonthTransactions();
 
-  if (user.publicMetadata.subscriptionPlan === "premium") {
-    return true;
+  if (user.publicMetadata.subscriptionPlan !== "premium") {
+    return false;
   }
   if (currentMonthTransactions >= 10) {
     return false;

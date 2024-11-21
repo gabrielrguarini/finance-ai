@@ -23,6 +23,7 @@ export const POST = async (request: Request) => {
 
   switch (event.type) {
     case "invoice.paid": {
+      console.log("INVOICE PAGA");
       const { customer, subscription, subscription_details } =
         event.data.object;
       const clerkUserId = subscription_details?.metadata?.clerk_user_id;

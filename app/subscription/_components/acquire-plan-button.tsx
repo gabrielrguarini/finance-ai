@@ -37,7 +37,7 @@ const AcquirePlanButton = () => {
       className="w-full rounded-full font-bold"
       variant="default"
     >
-      Gerenciar plano
+      Adquirir plano
     </Button>
   );
 };
